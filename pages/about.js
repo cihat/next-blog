@@ -1,14 +1,16 @@
-import Layout from '../components/Layout'
 import Head from 'next/head'
+import Layout from '../components/Layout'
 
 const index = () => {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Hakkımda</title>
       </Head>
-      <h1>Ana Sayfa</h1>
-    </Layout>
+      <Layout>
+        <h1>Ana Sayfa</h1>
+      </Layout>
+    </>
   )
 }
 

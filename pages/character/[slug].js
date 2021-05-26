@@ -1,28 +1,27 @@
-import unfetch from 'isomorphic-unfetch'
 import Head from 'next/head'
 import slug from 'slug'
 import Layout from '../../components/Layout'
 
 const CharacterDetail = ({ character }) => {
-  console.log(character)
-
   return (
-    <Layout>
+    <>
       <Head>
         <title>Ana Sayfa</title>
-        <h1>{character.name}</h1>
+      </Head>
 
+      <Layout>
+        <h1>{character.name}</h1>
         <figure>
           <img src={character.image} alt={character.name} />
         </figure>
-      </Head>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 
 export async function getStaticPaths() {
   //* data fetch
-  const data = await unfetch(`https://rickandmortyapi.com/api/character/`)
+  const data = await fetch(`https://rickandmortyapi.com/api/character/`)
   const characters = await data.json()
 
   const paths = characters.results.map((character) => {
@@ -37,12 +36,9 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params }) => {
   // //! data fetch
-
   const id = params.slug.split('-').slice(-1)[0]
 
-  const data = await unfetch(
-    `https://rickandmortyapi.com/api/character/${id}`
-  )
+  const data = await fetch(`https://rickandmortyapi.com/api/character/${id}`)
   const character = await data.json()
 
   return {
